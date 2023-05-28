@@ -14,8 +14,6 @@ export class DeletePostUseCase implements DeletePostUseCaseInterface {
   constructor (dependencies: Dependencies) {
     this.postRepository = dependencies.postRepository
     this.storageService = dependencies.storageService
-
-
   }
 
   async delete (postRequest: DeletePostRequest): Promise<DeletePostResult> {

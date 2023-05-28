@@ -67,7 +67,7 @@ export class ListPostByAnimalTypeUseCase implements ListPostByAnimalTypeUseCaseI
       const reportList = await this.reportRepository.listByPost(postDTO._id)
       return this.to_post(postDTO, userDTO, reportList)
     })
-  
+
     const list = await Promise.all(postUserReportPromises)
 
     return {

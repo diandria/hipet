@@ -64,7 +64,6 @@ export class CreatePostUseCase implements CreatePostUseCaseInterface {
       }
     }
 
-
     animal.name = postRequest.animal.name
     animal.color = postRequest.animal.color
     animal.size = postRequest.animal.size
@@ -79,7 +78,7 @@ export class CreatePostUseCase implements CreatePostUseCaseInterface {
     postDTO.animal = animal
     postDTO.created_at = new Date()
     if (postRequest.picture) {
-      const picture = await this.storageService.saveImg(postRequest.picture, postDTO._id, "post")
+      const picture = await this.storageService.saveImg(postRequest.picture, postDTO._id, 'post')
       postDTO.picture = picture
     }
 

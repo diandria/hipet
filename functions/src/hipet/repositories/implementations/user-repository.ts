@@ -1,16 +1,16 @@
 import { UserRepository } from '../interfaces/user-repository-interface'
 import { UserDTO } from '../models'
-import { MongoClient } from 'mongodb';
+import { MongoClient } from 'mongodb'
 import env from '../../../main/env'
 
 const collectionName = 'User'
-const dbName = 'hipet';
-const mongoClient = MongoClient.connect(env.mongodb.mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
+const dbName = 'hipet'
+const mongoClient = MongoClient.connect(env.mongodb.mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 
 export class MongoUserRepository implements UserRepository {
   async add (user: UserDTO): Promise<UserDTO> {
-    const client = await mongoClient;
-    const db = client.db(dbName);
+    const client = await mongoClient
+    const db = client.db(dbName)
 
     try {
       await db.collection(collectionName).insertOne(user)
@@ -21,8 +21,8 @@ export class MongoUserRepository implements UserRepository {
   }
 
   async findUserBy (field: string, value: any): Promise<UserDTO> {
-    const client = await mongoClient;
-    const db = client.db(dbName);
+    const client = await mongoClient
+    const db = client.db(dbName)
 
     try {
       return await db.collection(collectionName).findOne({ [field]: value })
@@ -32,20 +32,20 @@ export class MongoUserRepository implements UserRepository {
   }
 
   async delete (customerId: string): Promise<boolean> {
-    const client = await mongoClient;
-    const db = client.db(dbName);
+    const client = await mongoClient
+    const db = client.db(dbName)
 
     try {
       await db.collection(collectionName).remove({ _id: customerId })
-      return true  
+      return true
     } catch (err) {
       return false
     }
   }
 
   async updateBy (field: string, value: any, user: UserDTO): Promise<UserDTO> {
-    const client = await mongoClient;
-    const db = client.db(dbName);
+    const client = await mongoClient
+    const db = client.db(dbName)
 
     try {
       const filter = { [field]: value }

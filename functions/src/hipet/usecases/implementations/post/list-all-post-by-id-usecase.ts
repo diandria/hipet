@@ -61,15 +61,15 @@ export class ListAllPostUseCase implements ListAllPostUseCaseInterface {
 
   async list (reportRequest: ListAllPostRequest): Promise<ListAllPostResult> {
     const posts = await this.postRepository.listAll(reportRequest.limit)
-  
+
     const postUserReportPromises = posts.map(async (postDTO) => {
       const userDTO = await this.userRepository.findUserBy('_id', postDTO.customer_id)
       const reportList = await this.reportRepository.listByPost(postDTO._id)
       return this.to_post(postDTO, userDTO, reportList)
     })
-  
+
     const list = await Promise.all(postUserReportPromises)
-  
+
     return {
       status: ListAllPostResultStatusOptions.success,
       posts: list

@@ -63,7 +63,7 @@ export class CreateUserUseCase implements CreateUserUseCaseInterface {
 
     if (isEmailUsed || isDocumentUsed || isNickNameUsed) return { status: CreateUserResultStatusOptions.unique_key_field }
 
-    const picture = userRequest.picture ? await this.storageService.saveImg(userRequest.picture, userDTO._id, "user") : defaultUserImage
+    const picture = userRequest.picture ? await this.storageService.saveImg(userRequest.picture, userDTO._id, 'user') : defaultUserImage
     userDTO.picture = picture
 
     const createdUser = await this.userRepository.add(userDTO)

@@ -62,14 +62,14 @@ export class ListPostByUserUseCase implements ListPostByUserUseCaseInterface {
   async list (reportRequest: ListPostByUserRequest): Promise<ListPostByUserResult> {
     const userDTO = await this.userRepository.findUserBy('_id', reportRequest.customer_id)
     if (!userDTO) return { status: ListPostByUserResultStatusOptions.user_not_found }
-    
+
     const posts = await this.postRepository.listBy('customer_id', reportRequest.customer_id)
 
     const postUserReportPromises = posts.map(async (postDTO) => {
       const reportList = await this.reportRepository.listByPost(postDTO._id)
       return this.to_post(postDTO, userDTO, reportList)
     })
-  
+
     const list = await Promise.all(postUserReportPromises)
 
     return {

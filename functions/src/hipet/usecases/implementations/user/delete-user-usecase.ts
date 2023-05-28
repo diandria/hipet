@@ -32,8 +32,8 @@ export class DeleteUserUseCase implements DeleteUserUseCaseInterface {
 
     const deletedPosts = await this.postRepository.deleteAll('customer_id', userRequest.id)
     if (!deletedPosts) return { status: DeleteUserResultStatusOptions.post_repository_error }
-    
-    await Promise.all(posts.map(post => this.storageService.deleteImg(post._id, 'post')));
+
+    await Promise.all(posts.map(async post => await this.storageService.deleteImg(post._id, 'post')))
 
     return {
       status: DeleteUserResultStatusOptions.success

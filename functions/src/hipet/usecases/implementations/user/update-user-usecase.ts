@@ -63,11 +63,10 @@ export class UpdateUserUseCase implements UpdateUserUseCaseInterface {
     if (userRequest.password) userDTO.password = this.crytographService.encrypt(userRequest.password)
     if (userRequest.donation_link) userDTO.donation_link = userRequest.donation_link
 
-    if (userRequest.picture ) {
-      const picture = await this.storageService.saveImg(userRequest.picture, userRequest.id, "user")
+    if (userRequest.picture) {
+      const picture = await this.storageService.saveImg(userRequest.picture, userRequest.id, 'user')
       userDTO.picture = picture
     }
-
 
     const updatedUser = await this.userRepository.updateBy('_id', userRequest.id, userDTO)
     if (!updatedUser) {
