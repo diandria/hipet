@@ -1,4 +1,4 @@
-import { CreateUserResult, CreateUserResultStatusOptions, CreateUserUseCaseInterface } from '../../../hipet/usecases/interfaces'
+import { CreateUserResult, CreateUserResultStatusOptions, CreateUserUseCaseInterface, DeleteUserResult, DeleteUserResultStatusOptions, DeleteUserUseCaseInterface } from '../../../hipet/usecases/interfaces'
 import { mockUser } from '../schemata/entities'
 
 export const makeCreateUserUseCase = (): CreateUserUseCaseInterface => {
@@ -11,4 +11,15 @@ export const makeCreateUserUseCase = (): CreateUserUseCaseInterface => {
     }
   }
   return new CreateUserUseCaseStub()
+}
+
+export const makeDeleteUserUseCase = (): DeleteUserUseCaseInterface => {
+  class DeleteUserUseCaseStub implements DeleteUserUseCaseInterface {
+    async delete (): Promise<DeleteUserResult> {
+      return {
+        status: DeleteUserResultStatusOptions.success
+      }
+    }
+  }
+  return new DeleteUserUseCaseStub()
 }
