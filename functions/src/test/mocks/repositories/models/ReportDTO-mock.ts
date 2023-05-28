@@ -1,7 +1,7 @@
 import { ReportDTO } from '../../../../hipet/repositories/models'
 import { ReasonOptions } from '../../../../hipet/schemata/entities'
 
-export const ReportDTOmock = (): ReportDTO => {
+export const mockReportDTO = (): ReportDTO => {
   const reportDTO = new ReportDTO()
   reportDTO._id = '00000000-0000-0000-0000-000000000000'
   reportDTO.post_id = '00000000-0000-0000-0000-000000000000'
