@@ -1,7 +1,7 @@
-import { User, UserTypeOptions } from '../../../schemata/entities'
+import { User } from '../../../schemata/entities'
 
 export type UserRequest = {
-  type: UserTypeOptions
+  type: string
   name: string
   email: string
   nickname: string

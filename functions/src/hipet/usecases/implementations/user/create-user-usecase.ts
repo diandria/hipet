@@ -2,7 +2,7 @@ import { UserDTO } from '../../../repositories/models'
 import { UserRepository } from '../../../repositories/interfaces'
 import { CreateUserResult, CreateUserResultStatusOptions, CreateUserUseCaseInterface, UserRequest } from '../../interfaces/user'
 import { CryptographService, StorageService, UuidService } from '../../../services/interfaces'
-import { User } from '../../../schemata/entities'
+import { User, UserTypeOptions } from '../../../schemata/entities'
 import { defaultUserImage } from '../../../../../config/defaults/images'
 
 type Dependencies = {
@@ -44,9 +44,10 @@ export class CreateUserUseCase implements CreateUserUseCaseInterface {
 
   async create (userRequest: UserRequest): Promise<CreateUserResult> {
     const userDTO = new UserDTO()
+    const userType = userRequest.type === 'PERSON' ? UserTypeOptions.person : UserTypeOptions.ong
 
     userDTO._id = this.uuidService.uuid()
-    userDTO.type = userRequest.type
+    userDTO.type = userType
     userDTO.name = userRequest.name
     userDTO.email = userRequest.email
     userDTO.nickname = userRequest.nickname

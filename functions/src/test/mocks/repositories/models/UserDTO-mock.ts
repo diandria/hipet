@@ -1,7 +1,7 @@
 import { UserDTO } from '../../../../hipet/repositories/models'
 import { UserTypeOptions } from '../../../../hipet/schemata/entities'
 
-const UserPersonDTOmock = (): UserDTO => {
+const mockUserPersonDTO = (): UserDTO => {
   const userDTO = new UserDTO()
   userDTO._id = '00000000-0000-0000-0000-000000000000'
   userDTO.type = UserTypeOptions.person
@@ -17,7 +17,7 @@ const UserPersonDTOmock = (): UserDTO => {
   return userDTO
 }
 
-const UserOngDTOmock = (): UserDTO => {
+const mockUserOngDTO = (): UserDTO => {
   const userDTO = new UserDTO()
   userDTO._id = '00000000-0000-0000-0000-000000000000'
   userDTO.type = UserTypeOptions.person
@@ -35,8 +35,8 @@ const UserOngDTOmock = (): UserDTO => {
 
 export const mockUserDTO = (type: string): UserDTO => {
   if (type === 'person') {
-    return UserPersonDTOmock()
+    return mockUserPersonDTO()
   } else if (type === 'ong') {
-    return UserOngDTOmock()
+    return mockUserOngDTO()
   }
 }
