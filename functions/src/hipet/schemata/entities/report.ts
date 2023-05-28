@@ -1,4 +1,10 @@
-export type ReasonOptions = 'PUBLICACAO_SUSPEITA' | 'VENDA_DE_ANIMAL' | 'MAUS_TRATOS' | 'SPAM' | 'OUTRO'
+export enum ReasonOptions {
+  suspicious_post = 'PUBLICACAO_SUSPEITA',
+  animal_sale = 'VENDA_DE_ANIMAL',
+  bad_treatment = 'MAUS_TRATOS',
+  spam = 'SPAM',
+  other = 'OUTRO'
+}
 
 export class Report {
   id: string

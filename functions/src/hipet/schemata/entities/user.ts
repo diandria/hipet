@@ -1,4 +1,7 @@
-export type UserTypeOptions = 'PERSON' | 'ONG'
+export enum UserTypeOptions {
+  person = 'PERSON',
+  ong = 'ONG'
+}
 
 export class User {
   id: string
