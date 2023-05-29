@@ -1,5 +1,5 @@
-import { CreateUserResult, CreateUserResultStatusOptions, CreateUserUseCaseInterface, DeleteUserResult, DeleteUserResultStatusOptions, DeleteUserUseCaseInterface, FindUserByIdResult, FindUserByIdResultStatusOptions, FindUserByIdUseCaseInterface, FindUserByNicknameResult, FindUserByNicknameResultStatusOptions, FindUserByNicknameUseCaseInterface, UpdateUserResult, UpdateUserResultStatusOptions, UpdateUserUseCaseInterface } from '../../../hipet/usecases/interfaces'
-import { mockUser } from '../schemata/entities'
+import { CreateUserResult, CreateUserResultStatusOptions, CreateUserUseCaseInterface, DeleteUserResult, DeleteUserResultStatusOptions, DeleteUserUseCaseInterface, FindUserByIdResult, FindUserByIdResultStatusOptions, FindUserByIdUseCaseInterface, FindUserByNicknameResult, FindUserByNicknameResultStatusOptions, FindUserByNicknameUseCaseInterface, LoginUserResult, LoginUserResultStatusOptions, LoginUserUseCaseInterface, UpdateUserResult, UpdateUserResultStatusOptions, UpdateUserUseCaseInterface } from '../../../hipet/usecases/interfaces'
+import { mockSimpleUser, mockUser } from '../schemata/entities'
 
 export const makeCreateUserUseCase = (): CreateUserUseCaseInterface => {
   class CreateUserUseCaseStub implements CreateUserUseCaseInterface {
@@ -58,4 +58,16 @@ export const makeUpdateUserUseCase = (): UpdateUserUseCaseInterface => {
     }
   }
   return new UpdateUserUseCaseStub()
+}
+
+export const makeLoginUserUseCase = (): LoginUserUseCaseInterface => {
+  class LoginUserUseCaseStub implements LoginUserUseCaseInterface {
+    async authenticate (): Promise<LoginUserResult> {
+      return {
+        status: LoginUserResultStatusOptions.success,
+        user: mockSimpleUser()
+      }
+    }
+  }
+  return new LoginUserUseCaseStub()
 }
