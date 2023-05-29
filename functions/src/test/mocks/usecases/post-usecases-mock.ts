@@ -1,7 +1,7 @@
 import {
   CreatePostResult, CreatePostResultStatusOptions, CreatePostUseCaseInterface,
   DeletePostResult, DeletePostResultStatusOptions, DeletePostUseCaseInterface,
-  FindPostByIdResult, FindPostByIdResultStatusOptions, FindPostByIdUseCaseInterface, ListAllPostResult, ListAllPostResultStatusOptions, ListAllPostUseCaseInterface
+  FindPostByIdResult, FindPostByIdResultStatusOptions, FindPostByIdUseCaseInterface, ListAllPostResult, ListAllPostResultStatusOptions, ListAllPostUseCaseInterface, ListPostByAnimalTypeResult, ListPostByAnimalTypeResultStatusOptions, ListPostByAnimalTypeUseCaseInterface
 } from '../../../hipet/usecases/interfaces'
 import { mockPost } from '../schemata/entities'
 
@@ -50,4 +50,16 @@ export const makeListAllPostUseCase = (): ListAllPostUseCaseInterface => {
     }
   }
   return new ListAllPostUseCaseStub()
+}
+
+export const makeListPostByAnimalTypeUseCase = (): ListPostByAnimalTypeUseCaseInterface => {
+  class ListPostByAnimalTypeUseCaseStub implements ListPostByAnimalTypeUseCaseInterface {
+    async list (): Promise<ListPostByAnimalTypeResult> {
+      return {
+        status: ListPostByAnimalTypeResultStatusOptions.success,
+        posts: [mockPost()]
+      }
+    }
+  }
+  return new ListPostByAnimalTypeUseCaseStub()
 }

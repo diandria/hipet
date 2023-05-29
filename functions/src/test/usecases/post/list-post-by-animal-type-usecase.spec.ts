@@ -1,10 +1,11 @@
 import { PostRepository, ReportRepository, UserRepository } from '../../../hipet/repositories/interfaces'
-import { ListAllPostResultStatusOptions, ListAllPostUseCaseInterface } from '../../../hipet/usecases/interfaces'
-import { ListAllPostUseCase } from '../../../hipet/usecases/implementations'
+import { ListPostByAnimalTypeResultStatusOptions, ListPostByAnimalTypeUseCaseInterface } from '../../../hipet/usecases/interfaces'
+import { ListPostByAnimalTypeUseCase } from '../../../hipet/usecases/implementations'
 import { PostRepositoryStub, ReportRepositoryStub, UserRepositoryStub } from '../../mocks/repositories'
+import { AnimalTypeOptions } from '../../../hipet/schemata/entities'
 
 interface SutTypes {
-  sut: ListAllPostUseCaseInterface
+  sut: ListPostByAnimalTypeUseCaseInterface
   postRepositoryStub: PostRepository
   userRepositoryStub: UserRepository
   reportRepositoryStub: ReportRepository
@@ -15,7 +16,7 @@ const makeSut = (): SutTypes => {
   const userRepositoryStub = new UserRepositoryStub()
   const reportRepositoryStub = new ReportRepositoryStub()
 
-  const sut = new ListAllPostUseCase({ postRepository: postRepositoryStub, userRepository: userRepositoryStub, reportRepository: reportRepositoryStub })
+  const sut = new ListPostByAnimalTypeUseCase({ postRepository: postRepositoryStub, userRepository: userRepositoryStub, reportRepository: reportRepositoryStub })
   return {
     sut,
     postRepositoryStub,
@@ -24,16 +25,18 @@ const makeSut = (): SutTypes => {
   }
 }
 
-const makePostRequest = {}
+const makePostRequest = {
+  type: AnimalTypeOptions.dog
+}
 
 describe('Post - Use Case', () => {
-  describe('ListAll Post', () => {
+  describe('List Post By Animal Type', () => {
     test('Should return SUCCESS status and the correct data post list', async () => {
       const { sut } = makeSut()
       const createPostResult = await sut.list(makePostRequest)
 
-      expect(createPostResult.status).toEqual(ListAllPostResultStatusOptions.success)
-      expect(createPostResult.posts.length).toEqual(2)
+      expect(createPostResult.status).toEqual(ListPostByAnimalTypeResultStatusOptions.success)
+      expect(createPostResult.posts.length).toEqual(1)
     })
   })
 })
