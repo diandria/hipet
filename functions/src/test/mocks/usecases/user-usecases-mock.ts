@@ -1,4 +1,4 @@
-import { CreateUserResult, CreateUserResultStatusOptions, CreateUserUseCaseInterface, DeleteUserResult, DeleteUserResultStatusOptions, DeleteUserUseCaseInterface, FindUserByIdResult, FindUserByIdResultStatusOptions, FindUserByIdUseCaseInterface } from '../../../hipet/usecases/interfaces'
+import { CreateUserResult, CreateUserResultStatusOptions, CreateUserUseCaseInterface, DeleteUserResult, DeleteUserResultStatusOptions, DeleteUserUseCaseInterface, FindUserByIdResult, FindUserByIdResultStatusOptions, FindUserByIdUseCaseInterface, FindUserByNicknameResult, FindUserByNicknameResultStatusOptions, FindUserByNicknameUseCaseInterface } from '../../../hipet/usecases/interfaces'
 import { mockUser } from '../schemata/entities'
 
 export const makeCreateUserUseCase = (): CreateUserUseCaseInterface => {
@@ -34,4 +34,16 @@ export const makeFindUserByIdUseCase = (): FindUserByIdUseCaseInterface => {
     }
   }
   return new FindUserByIdUseCaseStub()
+}
+
+export const makeFindUserByNicknameUseCase = (): FindUserByNicknameUseCaseInterface => {
+  class FindUserByNicknameUseCaseStub implements FindUserByNicknameUseCaseInterface {
+    async find (): Promise<FindUserByNicknameResult> {
+      return {
+        status: FindUserByNicknameResultStatusOptions.success,
+        user: mockUser('person')
+      }
+    }
+  }
+  return new FindUserByNicknameUseCaseStub()
 }
