@@ -1,4 +1,4 @@
-import { CreateUserResult, CreateUserResultStatusOptions, CreateUserUseCaseInterface, DeleteUserResult, DeleteUserResultStatusOptions, DeleteUserUseCaseInterface, FindUserByIdResult, FindUserByIdResultStatusOptions, FindUserByIdUseCaseInterface, FindUserByNicknameResult, FindUserByNicknameResultStatusOptions, FindUserByNicknameUseCaseInterface } from '../../../hipet/usecases/interfaces'
+import { CreateUserResult, CreateUserResultStatusOptions, CreateUserUseCaseInterface, DeleteUserResult, DeleteUserResultStatusOptions, DeleteUserUseCaseInterface, FindUserByIdResult, FindUserByIdResultStatusOptions, FindUserByIdUseCaseInterface, FindUserByNicknameResult, FindUserByNicknameResultStatusOptions, FindUserByNicknameUseCaseInterface, UpdateUserResult, UpdateUserResultStatusOptions, UpdateUserUseCaseInterface } from '../../../hipet/usecases/interfaces'
 import { mockUser } from '../schemata/entities'
 
 export const makeCreateUserUseCase = (): CreateUserUseCaseInterface => {
@@ -46,4 +46,16 @@ export const makeFindUserByNicknameUseCase = (): FindUserByNicknameUseCaseInterf
     }
   }
   return new FindUserByNicknameUseCaseStub()
+}
+
+export const makeUpdateUserUseCase = (): UpdateUserUseCaseInterface => {
+  class UpdateUserUseCaseStub implements UpdateUserUseCaseInterface {
+    async update (): Promise<UpdateUserResult> {
+      return {
+        status: UpdateUserResultStatusOptions.success,
+        user: mockUser('person')
+      }
+    }
+  }
+  return new UpdateUserUseCaseStub()
 }
