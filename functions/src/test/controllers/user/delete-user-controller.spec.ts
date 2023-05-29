@@ -35,7 +35,7 @@ describe('Delete User Controller', () => {
     expect(httpResponse).toEqual(serverError(new ServerError(null)))
   })
 
-  test('Should return 500 if DeleteUserUseCase throws', async () => {
+  test('Should return 404 if user doesnt exist', async () => {
     const { sut, deleteUserUseCaseStub } = makeSut()
     jest.spyOn(deleteUserUseCaseStub, 'delete').mockImplementationOnce(async () =>
       Promise.resolve({
