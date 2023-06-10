@@ -11,11 +11,17 @@ export class User {
   nickname: string
   phone_number: string
   password: string
-  donation_link?: string
-  document?: string
   created_at: Date
   disabled_at?: Date
   picture?: string
+}
+
+export class UserPerson extends User {
+  document: string
+}
+
+export class UserOng extends User {
+  donation_link: string
 }
 
 export class SimpleUser {

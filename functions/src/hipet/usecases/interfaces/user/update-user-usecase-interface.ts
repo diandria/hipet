@@ -1,4 +1,4 @@
-import { User } from '../../../schemata/entities'
+import { UserOng, UserPerson } from '../../../schemata/entities'
 
 export type UpdateUserRequest = {
   id: string
@@ -20,7 +20,7 @@ export enum UpdateUserResultStatusOptions {
 
 export type UpdateUserResult = {
   status: UpdateUserResultStatusOptions
-  user?: User
+  user?: UserPerson | UserOng
 }
 
 export interface UpdateUserUseCaseInterface {

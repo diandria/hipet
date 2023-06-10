@@ -1,4 +1,4 @@
-import { User } from '../../../schemata/entities'
+import { UserPerson, UserOng } from '../../../schemata/entities'
 
 export type UserRequest = {
   type: string
@@ -20,7 +20,7 @@ export enum CreateUserResultStatusOptions {
 
 export type CreateUserResult = {
   status: CreateUserResultStatusOptions
-  user?: User
+  user?: UserPerson | UserOng
 }
 
 export interface CreateUserUseCaseInterface {

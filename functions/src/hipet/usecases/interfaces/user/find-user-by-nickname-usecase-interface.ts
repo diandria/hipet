@@ -1,4 +1,4 @@
-import { User } from '../../../schemata/entities'
+import { UserOng, UserPerson } from '../../../schemata/entities'
 
 export type FindUserByNicknameRequest = {
   nickname: string
@@ -11,7 +11,7 @@ export enum FindUserByNicknameResultStatusOptions {
 
 export type FindUserByNicknameResult = {
   status: FindUserByNicknameResultStatusOptions
-  user?: User
+  user?: UserPerson | UserOng
 }
 
 export interface FindUserByNicknameUseCaseInterface {

@@ -2,7 +2,7 @@ import { UserDTO } from '../../../repositories/models'
 import { UserRepository } from '../../../repositories/interfaces'
 import { UpdateUserResult, UpdateUserResultStatusOptions, UpdateUserUseCaseInterface, UpdateUserRequest } from '../../interfaces/user'
 import { CryptographService, StorageService } from '../../../services/interfaces'
-import { User } from '../../../schemata/entities'
+import { UserOng, UserPerson, UserTypeOptions } from '../../../schemata/entities'
 
 type Dependencies = {
   userRepository: UserRepository
@@ -21,8 +21,8 @@ export class UpdateUserUseCase implements UpdateUserUseCaseInterface {
     this.storageService = dependencies.storageService
   }
 
-  private to_user (userDTO: UserDTO): User {
-    const user = new User()
+  private to_person_user (userDTO: UserDTO): UserPerson {
+    const user = new UserPerson()
     user.id = userDTO._id
     user.type = userDTO.type
     user.name = userDTO.name
@@ -31,10 +31,30 @@ export class UpdateUserUseCase implements UpdateUserUseCaseInterface {
     user.phone_number = userDTO.phone_number
     user.password = this.crytographService.decrypt(userDTO.password)
     user.created_at = userDTO.created_at
-    if (userDTO.document) user.document = this.crytographService.decrypt(userDTO.document)
+    user.document = this.crytographService.decrypt(userDTO.document)
+    if (userDTO.picture) user.picture = userDTO.picture
+
+    return user
+  }
+
+  private to_ong_user (userDTO: UserDTO): UserOng {
+    const user = new UserOng()
+    user.id = userDTO._id
+    user.type = userDTO.type
+    user.name = userDTO.name
+    user.email = userDTO.email
+    user.nickname = userDTO.nickname
+    user.phone_number = userDTO.phone_number
+    user.password = this.crytographService.decrypt(userDTO.password)
+    user.created_at = userDTO.created_at
     if (userDTO.donation_link) user.donation_link = userDTO.donation_link
-    if (userDTO.disabled_at) user.disabled_at = userDTO.disabled_at
-    if (userDTO.picture) { user.picture = userDTO.picture }
+    if (userDTO.picture) user.picture = userDTO.picture
+
+    return user
+  }
+
+  private to_user (userDTO: UserDTO): UserOng | UserPerson {
+    const user = userDTO.type === UserTypeOptions.person ? this.to_person_user(userDTO) : this.to_ong_user(userDTO)
 
     return user
   }
